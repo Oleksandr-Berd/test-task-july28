@@ -7,12 +7,11 @@ import { Dna } from "react-loader-spinner";
 import { useState } from 'react';
 import EditForm from './components/EditForm/EditForm';
 
-
 const App: React.FC = (): JSX.Element => {
   const [showEditForm, setShowEditForm] = useState<Boolean>(false)
 
   const dispatch = useDispatch()
-  const { user, isRefreshing, isError } = useAuth()
+  const { user, isRefreshing } = useAuth()
 
   const handleCreateSubmit = ((data: IUser): void => {
     dispatch(register(data))
@@ -26,7 +25,7 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <>
-
+  
       {showEditForm ? <EditForm toggleEditForm={toggleEditForm} submit={handleChangeSubmit} id={user.id} /> : <div>
 
         {isRefreshing ? <Dna
@@ -37,13 +36,8 @@ const App: React.FC = (): JSX.Element => {
           wrapperStyle={{}}
           wrapperClass="dna-wrapper"
         /> : null}
-        {isError ? <h1>{isError}</h1> : null}
-        {user && !isRefreshing && !isError ? <div><h1>Welcome, {user.name} </h1> <button onClick={toggleEditForm}>Edit name</button>  <UserForm submit={handleCreateSubmit} /></div> : null
+        {user.name && !isRefreshing ? <div><h1>Welcome, {user.name} </h1> <button onClick={toggleEditForm}>Edit name</button>  </div> : !isRefreshing ? <UserForm submit={handleCreateSubmit} /> : null
         }
-       
-
-
-
       </div>}
 
     </>

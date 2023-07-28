@@ -10,18 +10,18 @@ import { ChangeEvent, useState } from 'react';
 const modalRoot: any = document.querySelector('#modal-root');
 
 const EditForm: React.FC<IPropsEditForm> = ({ toggleEditForm, submit, id }): JSX.Element => {
-const [newName, setNewName] = useState<string>("")
+    const [newName, setNewName] = useState<string>("")
 
     const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
         setNewName(evt.target.value)
-}
-    
-    const handleSubmit = (evt:ChangeEvent<HTMLFormElement>) => {
-   evt.preventDefault()  
-    
-    submit({newName, id})
     }
-    
+
+    const handleSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
+        evt.preventDefault()
+
+        submit({ newName, id })
+    }
+
     return createPortal(
         <>
             <div
@@ -30,13 +30,13 @@ const [newName, setNewName] = useState<string>("")
             >
                 <Modal.Dialog fullscreen={true}>
                     <Modal.Header>
-                        <Modal.Title>Modal title</Modal.Title>
+                        <Modal.Title>You can Change Your Name</Modal.Title>
                     </Modal.Header>
                     <form onSubmit={handleSubmit}>
                         <Modal.Body>
                             <fieldset>
                                 <legend>Edit name</legend>
-                                <input type="text" placeholder='type new name' onChange={handleChange}/>
+                                <input type="text" placeholder='type new name' onChange={handleChange} />
                             </fieldset>
                         </Modal.Body>
                         <Modal.Footer>

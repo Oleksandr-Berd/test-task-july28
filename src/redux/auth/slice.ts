@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  register, updateName,
-} from "./operations";
+import { register, updateName,  } from './operations';
+
 
 interface State {
   user: User;
-  token: null | string;
-  error: string | null;
-  isLoggedIn: boolean;
   isRefreshing: boolean;
 }
 interface User {
@@ -18,9 +14,6 @@ interface User {
 
 const initialState: State = {
   user: { name: null, email: null, id:null},
-  token: null,
-  error: null,
-  isLoggedIn: false,
   isRefreshing: false,
 };
 
@@ -38,9 +31,10 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(register.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload.message;
         state.isRefreshing = false;
-
+          state.user.name = "";
+          state.user.email = "";
+          state.user.id = "";
       })
       .addCase(updateName.pending, (state, action: PayloadAction<any>) => {
         state.isRefreshing = true;
@@ -50,11 +44,13 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(updateName.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload.message;
         state.isRefreshing = false;
+        state.user.name = ""
+        state.user.email = "";
+        state.user.id = "";
 
-      });
-  
+        
+      })
   },
 });
 
