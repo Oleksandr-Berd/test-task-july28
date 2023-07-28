@@ -34,10 +34,10 @@ const EditForm: React.FC<IPropsEditForm> = ({ toggleEditForm, submit, id }): JSX
                     </Modal.Header>
                     <form onSubmit={handleSubmit}>
                         <Modal.Body>
-                            <fieldset>
-                                <legend>Edit name</legend>
+
+                            <label>Edit name
                                 <input type="text" placeholder='type new name' onChange={handleChange} />
-                            </fieldset>
+                            </label>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={toggleEditForm}>Close</Button>
